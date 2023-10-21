@@ -1,5 +1,6 @@
 import * as api from "../api";
 import {
+  COMMENT,
   CREATE,
   DELETE,
   END_LOADING,
@@ -74,7 +75,17 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
+  }
+};
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+    dispatch({ type: COMMENT, payload: data });
+    return data.comments;
+  } catch (error) {
+    console.log(error);
   }
 };
 

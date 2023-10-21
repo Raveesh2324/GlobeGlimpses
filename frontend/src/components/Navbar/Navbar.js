@@ -68,7 +68,7 @@ const Navbar = () => {
           <Button
             component={Link}
             to="/auth"
-            varient="contained"
+            variaknt="contained"
             color="primary"
           >
             Sign In
