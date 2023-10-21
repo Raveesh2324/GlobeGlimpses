@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const secret = process.env.SECRET;
-console.log(secret);
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;

@@ -27,8 +27,8 @@ const Navbar = () => {
         logout();
       }
     }
-
     setUser(JSON.parse(localStorage.getItem("profile")));
+    // eslint-disable-next-line
   }, [location]);
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">

@@ -6,6 +6,7 @@ import {
   CardContent,
   CardMedia,
   Button,
+  ButtonBase,
   Typography,
 } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -15,11 +16,14 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts.js";
+import { useHistory } from "react-router-dom";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const openPost = () => history.push(`/posts/${post._id}`);
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
@@ -76,25 +80,26 @@ const Post = ({ post, setCurrentId }) => {
           </Button>
         </div>
       )}
-      <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary">
-          {post.tags.map((tag) => `#${tag} `)}
+      <ButtonBase className={classes.cardAction} onClick={openPost}>
+        <div className={classes.details}>
+          <Typography variant="body2" color="textSecondary">
+            {post.tags.map((tag) => `#${tag} `)}
+          </Typography>
+        </div>
+        <Typography
+          className={classes.title}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
+          {post.title}
         </Typography>
-      </div>
-      <Typography
-        className={classes.title}
-        gutterBottom
-        variant="h5"
-        component="h2"
-      >
-        {post.title}
-      </Typography>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.message}
-        </Typography>
-      </CardContent>
-
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {post.message}
+          </Typography>
+        </CardContent>
+      </ButtonBase>
       <CardActions className={classes.cardActions}>
         <Button
           size="small"
